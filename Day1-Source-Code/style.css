@@ -1,0 +1,441 @@
+/* ============================================================
+   DAY 1 — style.css
+   Everything you see on the page is styled from this one file.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CSS VARIABLES
+   Declare a colour once, reuse it everywhere with var().
+   Change a value here and the whole page follows.
+   Notice --bg and --surface: they are the #000 and #111 from
+   the lesson in section 01. The page practises what it teaches.
+   ------------------------------------------------------------ */
+:root {
+  --bg:        #000;   /* pure black       */
+  --surface:   #111;   /* near black       */
+  --surface-2: #1a1a1a;
+  --line:      #2b2b2b;
+  --text:      #f2f2f2;
+  --muted:     #8d8d8d;
+
+  --radius: 14px;
+  --font:  system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+}
+
+/* ------------------------------------------------------------
+   2. RESET + PAGE
+   ------------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 20px 64px;          /* side gutter so nothing touches the edge */
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: #ffd9a0;
+}
+
+/* ------------------------------------------------------------
+   3. HERO
+   ------------------------------------------------------------ */
+.hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-block: 88px 56px;
+  text-align: center;
+}
+
+.hero__kicker {
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero__title {
+  margin: 0 0 20px;
+  font-size: clamp(32px, 7vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.hero__lede {
+  margin: 0 auto;
+  max-width: 560px;
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--muted);
+}
+
+.hero__lede strong { color: var(--text); }
+
+/* ------------------------------------------------------------
+   4. SECTIONS
+   ------------------------------------------------------------ */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 56px;
+  border-top: 1px solid var(--line);
+}
+
+.section__title {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 4vw, 30px);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.section__num {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.section__lede {
+  margin: 0 0 26px;
+  max-width: 640px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------
+   5. THE HEX PAIR — #000 next to #111
+   Both panels need a border, otherwise #000 vanishes into the
+   #000 page background. That is a real lesson in itself.
+   ------------------------------------------------------------ */
+.hexpair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+
+.hexpair__panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-height: 190px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.hexpair__code {
+  font-family: var(--mono);
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hexpair__note {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------
+   6. THE HEX RAMP — #000 through #fff
+   JavaScript builds these sixteen chips in a loop.
+   ------------------------------------------------------------ */
+.ramp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(54px, 1fr));
+  gap: 8px;
+}
+
+.ramp__chip {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.ramp__block { height: 58px; }
+
+.ramp__label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 5px 0;
+  background: var(--surface);
+}
+
+/* ------------------------------------------------------------
+   7. THE TILE GRID
+   Each tile is a real <button>, so it works with a mouse,
+   with the Tab key and with Enter. Accessibility for free.
+   ------------------------------------------------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.tile {
+  /* undo the default button styling the browser gives us */
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.tile:hover  { transform: translateY(-4px); border-color: #4a4a4a; }
+.tile:active { transform: translateY(-1px); }
+.tile:focus-visible {
+  outline: 2px solid #7aa2ff;
+  outline-offset: 3px;
+}
+
+.tile__swatch {
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Rainbow tiles: the swatch IS the colour. */
+.tile__swatch--flat { background: var(--c); }
+
+/* Fruit tiles: a dark stage, with the fruit drawn on top of it. */
+.tile__swatch--stage { background: var(--surface-2); }
+
+.tile__body {
+  padding: 13px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tile__num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.tile__name { font-size: 15px; font-weight: 600; }
+
+.tile__hex {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------
+   8. THE FRUITS — drawn with border-radius, nothing else
+   No images. No emoji. No SVG. Every fruit is one <div>,
+   coloured by var(--c), which JavaScript sets per tile.
+   ------------------------------------------------------------ */
+.fruit { position: relative; }
+
+/* --- Apple: a circle squashed slightly, plus a stem and a leaf --- */
+.fruit--apple {
+  width: 84px;
+  height: 78px;
+  background: var(--c);
+  border-radius: 50% 50% 46% 46% / 46% 46% 54% 54%;
+}
+.fruit--apple::before {                 /* the stem */
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  width: 5px;
+  height: 19px;
+  background: #6b4423;
+  border-radius: 3px;
+  transform: translateX(-50%) rotate(9deg);
+}
+.fruit--apple::after {                  /* the leaf */
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 54%;
+  width: 26px;
+  height: 14px;
+  background: #3da35d;
+  border-radius: 0 70% 0 70%;
+  transform: rotate(-14deg);
+}
+
+/* --- Banana: one border of a circle. That is the whole trick. --- */
+.fruit--banana {
+  width: 84px;
+  height: 84px;
+  border: 16px solid transparent;
+  border-bottom-color: var(--c);
+  border-radius: 50%;
+  transform: rotate(-38deg);
+}
+
+/* --- Orange: a circle, shaded on one side with an inset shadow --- */
+.fruit--orange {
+  width: 78px;
+  height: 78px;
+  background: var(--c);
+  border-radius: 50%;
+  box-shadow: inset -9px -9px 0 rgba(0, 0, 0, 0.15);
+}
+.fruit--orange::before {                /* the leaf */
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 24px;
+  height: 13px;
+  background: #3da35d;
+  border-radius: 0 70% 0 70%;
+  transform: rotate(-16deg);
+}
+
+/* --- Grapes: ONE div, six grapes. box-shadow clones the circle. --- */
+.fruit--grape {
+  width: 24px;
+  height: 24px;
+  background: var(--c);
+  border-radius: 50%;
+  transform: translateY(-23px);         /* recentre the whole bunch */
+  box-shadow:
+    -26px   0px 0 var(--c),
+     26px   0px 0 var(--c),
+    -13px  23px 0 var(--c),
+     13px  23px 0 var(--c),
+      0px  46px 0 var(--c);
+}
+.fruit--grape::before {                 /* the stem */
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 4px;
+  height: 18px;
+  background: #6b4423;
+  border-radius: 3px;
+  transform: translateX(-50%);
+}
+
+/* ------------------------------------------------------------
+   9. THE COUNT
+   ------------------------------------------------------------ */
+.section--count { text-align: center; }
+
+.count {
+  margin: 0 0 6px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.count__big {
+  font-family: var(--mono);
+  font-size: clamp(56px, 14vw, 104px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.count__label {
+  font-size: 15px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.count__maths {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.count__hint { margin: 0; font-size: 14px; color: var(--muted); }
+
+/* ------------------------------------------------------------
+   10. FOOTER
+   ------------------------------------------------------------ */
+.footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 40px 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer p { margin: 0 0 6px; }
+.footer__files { font-family: var(--mono); font-size: 12px; }
+
+/* ------------------------------------------------------------
+   11. TOAST — the "Copied #FF0000" message
+   ------------------------------------------------------------ */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ------------------------------------------------------------
+   12. SMALL SCREENS
+   One breakpoint. The grids already reflow on their own.
+   ------------------------------------------------------------ */
+@media (max-width: 620px) {
+  .hexpair { grid-template-columns: 1fr; }
+  .hexpair__panel { min-height: 140px; }
+  .hero { padding-block: 56px 36px; }
+}
+
+/* Respect the reader who asked for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
